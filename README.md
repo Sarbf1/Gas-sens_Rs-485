@@ -18,3 +18,13 @@ All PCB components can be sourced by Mounser.
 ## Programs
 Hardware is developed in KiCad 7.0.
 Initially i wanted to programm on STM Cube IDE. currently not shure if it will work on a 8bit microcontroller.
+
+## current status
+finished first version of scematic and layout
+![grafik](https://github.com/Sarbf1/Gas-sens_Rs-485/assets/138530499/62b18b34-4dc6-4e33-84e6-a09aa440e553)
+
+
+#### to do
+- clean up scematic
+- simulate PWM to analog DC and check some datasheets
+- test components and connectivity using breakout boards
