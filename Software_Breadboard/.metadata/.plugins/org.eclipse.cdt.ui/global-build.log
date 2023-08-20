@@ -1,0 +1,41 @@
+23:13:10 **** Incremental Build of configuration Debug for project Breadboard_developement ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G031xx -c -I../Core/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:122:48: warning: passing argument 2 of 'HAL_UART_Transmit_DMA' from incompatible pointer type [-Wincompatible-pointer-types]
+  122 |                 HAL_UART_Transmit_DMA(&huart2, value_adc_DMA, sizeof(value_adc_DMA) );
+      |                                                ^~~~~~~~~~~~~
+      |                                                |
+      |                                                uint32_t * {aka long unsigned int *}
+In file included from ../Core/Inc/stm32g0xx_hal_conf.h:319,
+                 from ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart.h:1637:83: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'uint32_t *' {aka 'long unsigned int *'}
+ 1637 | HAL_StatusTypeDef HAL_UART_Transmit_DMA(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size);
+      |                                                                    ~~~~~~~~~~~~~~~^~~~~
+arm-none-eabi-gcc -o "Breadboard_developement.elf" @"objects.list"   -mcpu=cortex-m0plus -T"D:\Sarbach_Product dev\Gassensor-garage\Gas-sens_Rs-485\Software_Breadboard\Breadboard_developement\STM32G031K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Breadboard_developement.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Breadboard_developement.elf
+ 
+arm-none-eabi-size   Breadboard_developement.elf 
+arm-none-eabi-objdump -h -S  Breadboard_developement.elf  > "Breadboard_developement.list"
+   text	   data	    bss	    dec	    hex	filename
+  22548	     20	   2228	  24796	   60dc	Breadboard_developement.elf
+Finished building: default.size.stdout
+ 
+Finished building: Breadboard_developement.list
+ 
+23:15:16 **** Incremental Build of configuration Debug for project Breadboard_developement ****
+make -j8 all 
+arm-none-eabi-size   Breadboard_developement.elf 
+   text	   data	    bss	    dec	    hex	filename
+  22548	     20	   2228	  24796	   60dc	Breadboard_developement.elf
+Finished building: default.size.stdout
+ 
+23:16:56 **** Incremental Build of configuration Debug for project Breadboard_developement ****
+make -j8 all 
+arm-none-eabi-size   Breadboard_developement.elf 
+   text	   data	    bss	    dec	    hex	filename
+  22548	     20	   2228	  24796	   60dc	Breadboard_developement.elf
+Finished building: default.size.stdout
+ 
