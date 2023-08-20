@@ -1,0 +1,25 @@
+Circuit: * D:\Sarbach_Product dev\Gassensor-garage\Gas-sens_Rs-485\Simulations\PWM_Source.asc
+
+Limiting rise time of source v1 to 0.01
+Limiting fall time of source v1 to 0.01
+Limiting fall time of source v2 to 2.03288e-20
+Direct Newton iteration for .op point succeeded.
+
+Date: Tue Aug 15 22:43:22 2023
+Total elapsed time: 3.173 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 1005037
+traniter = 1005034
+tranpoints = 500123
+accept = 500113
+rejected = 10
+matrix size = 7
+fillins = 0
+solver = Normal
+Avg thread counts: 1.0/1.0/1.0/1.0
+Matrix Compiler1: 124 bytes object code size  0.4/0.3/[0.2]
+Matrix Compiler2: 331 bytes object code size  0.2/0.4/[0.1]
+
