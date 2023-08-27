@@ -67,10 +67,12 @@ void Error_Handler(void);
 #define T_VCP_TX_GPIO_Port GPIOA
 #define T_VCP_RX_Pin GPIO_PIN_3
 #define T_VCP_RX_GPIO_Port GPIOA
-#define ADC1_IN5_CO_Pin GPIO_PIN_5
-#define ADC1_IN5_CO_GPIO_Port GPIOA
-#define ADC_IN7_NO_Pin GPIO_PIN_7
-#define ADC_IN7_NO_GPIO_Port GPIOA
+#define TIM2_CH1_PWM_NO_Pin GPIO_PIN_5
+#define TIM2_CH1_PWM_NO_GPIO_Port GPIOA
+#define ADC1_IN6_CO_Pin GPIO_PIN_6
+#define ADC1_IN6_CO_GPIO_Port GPIOA
+#define ADC1_IN7_NO_Pin GPIO_PIN_7
+#define ADC1_IN7_NO_GPIO_Port GPIOA
 #define ADC1_IN8_GAIN_NO_Pin GPIO_PIN_0
 #define ADC1_IN8_GAIN_NO_GPIO_Port GPIOB
 #define ADC1_IN9_OFFSET_NO_Pin GPIO_PIN_1

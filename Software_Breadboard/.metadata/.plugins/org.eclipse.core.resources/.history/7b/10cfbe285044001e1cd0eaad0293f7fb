@@ -128,7 +128,6 @@ int main(void)
 		TIM1->CCR1 = TIM1->ARR/(4095/value_adc_DMA[0]); //DMA is 12 Bit		CO sensor
 		TIM2->CCR1 = TIM1->ARR/(4095/value_adc_DMA[1]); //DMA is 12 Bit		NO sensor value
 
-
 	}
   /* USER CODE END 3 */
 }

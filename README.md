@@ -7,24 +7,26 @@ a sinlge LED used for showing cominucation or Error state. the small footprint m
 the PCB can be hand-solderd with a bit of skill. 
 Use cases can be in Garage systems (linked with the vents and gas alarm system), hobbyist workshop or any other room such as Office spaces and schools.
 
-
+![grafik](https://github.com/Sarbf1/Gas-sens_Rs-485/tree/main/Pictures/3d_Top.PNG)
+![grafik](https://github.com/Sarbf1/Gas-sens_Rs-485/tree/main/Pictures/3d_Bottom.PNG)
 
 ## Components
-The core is a MiCS-6814 Gas sensor. It was chosen due to the small build size, cheap price and containing a reduction (CO), Ox (zb. NO2) and NH3 sensor in one case.
-A STM8S003F3P is the logical unit. Is is cheap and readily available.
-Internally all components used are 5V supplied, by an oversized non isolated DC/DC converter.
-All PCB components can be sourced by Mounser.
 
-## Programs
+A STM32G031K8 is the logical unit. Is is cheap and readily available.
+The very most components use standart fooprints. thus, they are easily exchangeble in case of a shortage.
+The parts are SMD, except for the Sensors, DCDC converter and Connectorss
+All PCB components can be sourced by Mouser.
+
+## Programming
 Hardware is developed in KiCad 7.0.
-Initially i wanted to programm on STM Cube IDE. currently not shure if it will work on a 8bit microcontroller.
 
-## current status
-finished first version of scematic and layout
-![grafik](https://github.com/Sarbf1/Gas-sens_Rs-485/assets/138530499/62b18b34-4dc6-4e33-84e6-a09aa440e553)
+everything is programmed on STM Cube IDE. The Sensor and trim potentiometers are read-in using DMA
 
+## Simulation
+Low pass filter for the PWM (from uC to OpAmp) has been simulated using LTSpice.
 
 #### to do
 - clean up scematic
 - simulate PWM to analog DC and check some datasheets
 - test components and connectivity using breakout boards
+
