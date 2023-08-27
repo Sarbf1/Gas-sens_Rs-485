@@ -19,8 +19,14 @@ All PCB components can be sourced by Mouser.
 
 ## Programming
 Hardware is developed in KiCad 7.0.
+
 everything is programmed on STM Cube IDE. The Sensor and trim potentiometers are read-in using DMA
 
 ## Simulation
 Low pass filter for the PWM (from uC to OpAmp) has been simulated using LTSpice.
+
+#### to do
+- clean up scematic
+- simulate PWM to analog DC and check some datasheets
+- test components and connectivity using breakout boards
 
