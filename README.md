@@ -21,10 +21,12 @@ i am currently looking into more professional solutions for the sensor.
 
 ## Programming
 Hardware is developed in KiCad 7.0.
+
 everything is programmed on STM Cube IDE. The Sensor and trim potentiometers are read-in using DMA
 
 ## Simulation
 Low pass filter for the PWM (from uC to OpAmp to voltag eand current output) has been simulated using LTSpice.
+
 
 ## next steps
 [x] PWM filter simulations
@@ -34,3 +36,4 @@ Low pass filter for the PWM (from uC to OpAmp to voltag eand current output) has
 [] implement Modbus via RS-485
 [] create Bill of material
 [] Make second physical prototype
+
