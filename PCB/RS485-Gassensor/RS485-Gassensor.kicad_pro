@@ -45,7 +45,7 @@
         "silk_text_thickness": 0.15,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.5
+          "min_clearance": 0.25
         }
       },
       "diff_pair_dimensions": [
@@ -527,6 +527,18 @@
     [
       "3e460a3b-bdfc-40e9-ad81-ef9b20842c44",
       ""
+    ],
+    [
+      "56df87f9-40e4-4845-8add-dde93b846cdd",
+      "Conectors and Power"
+    ],
+    [
+      "66f20eb0-642b-497e-b8d8-9b435658be21",
+      "Inputs and sensors"
+    ],
+    [
+      "9d83f588-fa0e-41f8-8cf7-9ca24a12f734",
+      "Output"
     ]
   ],
   "text_variables": {}

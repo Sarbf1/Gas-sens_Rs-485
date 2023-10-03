@@ -28,6 +28,8 @@
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
 #include <stdbool.h>
+#include "mmodbusConfig.h"
+#include "mmodbus.h"
 
 /* USER CODE END Includes */
 
@@ -88,6 +90,8 @@ int main(void)
 
   /* USER CODE BEGIN SysInit */
 
+
+
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -100,18 +104,21 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 
+
+
 	uint32_t value_adc_DMA[7]={0,0,0,0,0,0,0}; // [NCO, NO, NO offset, NO gain, CO offset, CO gain, int_Temperature] // #TODO restructure as struct instrad array
 
+	/* testing duty cycle
 	uint8_t DutyCycle = 50; // Duty cycle in Percent
 
 	TIM1->CCR1 = TIM1->ARR/(100/DutyCycle); //ARR = 256 (8 bit)
 	TIM2->CCR1 = TIM1->ARR/(100/DutyCycle); //ARR = 256 (8 bit)
+*/
 
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
 	//HAL_ADC_Start_DMA(&hadc1, value_adc_DMA, 7); // done in while loop
-
-
+	HAL_ADC_Start_DMA(&hadc1, value_adc_DMA, 7);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -125,8 +132,12 @@ int main(void)
 		//HAL_UART_Transmit_DMA(&huart2, value_adc_DMA, sizeof(value_adc_DMA) ); // #TODO with dma or from written buffer??
 
 		HAL_ADC_Start_DMA(&hadc1, value_adc_DMA, 7); // #TODO export to internal timer callback (trigger)
-		TIM1->CCR1 = TIM1->ARR/(4095/value_adc_DMA[0]); //DMA is 12 Bit		CO sensor
-		TIM2->CCR1 = TIM1->ARR/(4095/value_adc_DMA[1]); //DMA is 12 Bit		NO sensor value
+		/* 	//uncomment for sensor use
+		TIM1->CCR1 = TIM1->ARR*value_adc_DMA[0]/4095; //DMA is 12 Bit		CO sensor
+		TIM2->CCR1 = TIM1->ARR*value_adc_DMA[1]/4095; //DMA is 12 Bit		NO sensor value
+
+		 */
+		TIM1->CCR1 = TIM1->ARR*value_adc_DMA[2]/4095;
 
 
 	}

@@ -1,85 +1,25 @@
-23:14:10 **** Incremental Build of configuration Debug for project Breadboard_developement ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/adc.c" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G031xx -c -I../Core/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/adc.d" -MT"Core/Src/adc.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/adc.o"
-arm-none-eabi-gcc "../Core/Src/dma.c" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G031xx -c -I../Core/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/dma.d" -MT"Core/Src/dma.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/dma.o"
-arm-none-eabi-gcc "../Core/Src/gpio.c" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G031xx -c -I../Core/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/gpio.d" -MT"Core/Src/gpio.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/gpio.o"
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G031xx -c -I../Core/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc "../Core/Src/stm32g0xx_hal_msp.c" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G031xx -c -I../Core/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32g0xx_hal_msp.d" -MT"Core/Src/stm32g0xx_hal_msp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32g0xx_hal_msp.o"
-arm-none-eabi-gcc "../Core/Src/stm32g0xx_it.c" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G031xx -c -I../Core/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32g0xx_it.d" -MT"Core/Src/stm32g0xx_it.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32g0xx_it.o"
-arm-none-eabi-gcc "../Core/Src/tim.c" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G031xx -c -I../Core/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/tim.d" -MT"Core/Src/tim.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/tim.o"
-arm-none-eabi-gcc "../Core/Src/usart.c" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G031xx -c -I../Core/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/usart.d" -MT"Core/Src/usart.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/usart.o"
-arm-none-eabi-gcc -o "Breadboard_developement.elf" @"objects.list"   -mcpu=cortex-m0plus -T"D:\Sarbach_Product dev\Gassensor-garage\Gas-sens_Rs-485\Software_Breadboard\Breadboard_developement\STM32G031K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Breadboard_developement.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Breadboard_developement.elf
- 
-arm-none-eabi-size   Breadboard_developement.elf 
-arm-none-eabi-objdump -h -S  Breadboard_developement.elf  > "Breadboard_developement.list"
-   text	   data	    bss	    dec	    hex	filename
-  22152	     20	   2396	  24568	   5ff8	Breadboard_developement.elf
-Finished building: default.size.stdout
- 
-Finished building: Breadboard_developement.list
- 
-22:34:24 **** Incremental Build of configuration Debug for project Breadboard_developement ****
+00:29:33 **** Incremental Build of configuration Debug for project Barod_Prototype ****
 make -j8 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G031xx -c -I../Core/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "Breadboard_developement.elf" @"objects.list"   -mcpu=cortex-m0plus -T"D:\Sarbach_Product dev\Gassensor-garage\Gas-sens_Rs-485\Software_Breadboard\Breadboard_developement\STM32G031K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Breadboard_developement.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Breadboard_developement.elf
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:116:31: warning: variable 'Temp' set but not used [-Wunused-but-set-variable]
+  116 |         struct sensor Co, No, Temp;
+      |                               ^~~~
+arm-none-eabi-gcc -o "Barod_Prototype.elf" @"objects.list"   -mcpu=cortex-m0plus -T"D:\Sarbach_Product dev\Gassensor-garage\Gas-sens_Rs-485\Software_Breadboard\Barod_Prototype\STM32G031K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Barod_Prototype.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Barod_Prototype.elf
  
-arm-none-eabi-size   Breadboard_developement.elf 
-arm-none-eabi-objdump -h -S  Breadboard_developement.elf  > "Breadboard_developement.list"
+arm-none-eabi-size   Barod_Prototype.elf 
+arm-none-eabi-objdump -h -S  Barod_Prototype.elf  > "Barod_Prototype.list"
    text	   data	    bss	    dec	    hex	filename
-  22152	     20	   2396	  24568	   5ff8	Breadboard_developement.elf
+  31020	     28	   2428	  33476	   82c4	Barod_Prototype.elf
 Finished building: default.size.stdout
  
-Finished building: Breadboard_developement.list
+Finished building: Barod_Prototype.list
  
-22:35:56 **** Incremental Build of configuration Debug for project Breadboard_developement ****
+00:29:49 **** Incremental Build of configuration Debug for project Barod_Prototype ****
 make -j8 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G031xx -c -I../Core/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "Breadboard_developement.elf" @"objects.list"   -mcpu=cortex-m0plus -T"D:\Sarbach_Product dev\Gassensor-garage\Gas-sens_Rs-485\Software_Breadboard\Breadboard_developement\STM32G031K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Breadboard_developement.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Breadboard_developement.elf
- 
-arm-none-eabi-size   Breadboard_developement.elf 
-arm-none-eabi-objdump -h -S  Breadboard_developement.elf  > "Breadboard_developement.list"
+arm-none-eabi-size   Barod_Prototype.elf 
    text	   data	    bss	    dec	    hex	filename
-  22152	     20	   2396	  24568	   5ff8	Breadboard_developement.elf
+  31020	     28	   2428	  33476	   82c4	Barod_Prototype.elf
 Finished building: default.size.stdout
- 
-Finished building: Breadboard_developement.list
- 
-22:38:46 **** Incremental Build of configuration Debug for project Breadboard_developement ****
-make -j8 all 
-arm-none-eabi-size   Breadboard_developement.elf 
-   text	   data	    bss	    dec	    hex	filename
-  22152	     20	   2396	  24568	   5ff8	Breadboard_developement.elf
-Finished building: default.size.stdout
- 
-22:42:09 **** Incremental Build of configuration Debug for project Breadboard_developement ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/adc.c" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G031xx -c -I../Core/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/adc.d" -MT"Core/Src/adc.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/adc.o"
-arm-none-eabi-gcc -o "Breadboard_developement.elf" @"objects.list"   -mcpu=cortex-m0plus -T"D:\Sarbach_Product dev\Gassensor-garage\Gas-sens_Rs-485\Software_Breadboard\Breadboard_developement\STM32G031K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Breadboard_developement.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Breadboard_developement.elf
- 
-arm-none-eabi-size   Breadboard_developement.elf 
-arm-none-eabi-objdump -h -S  Breadboard_developement.elf  > "Breadboard_developement.list"
-   text	   data	    bss	    dec	    hex	filename
-  22152	     20	   2396	  24568	   5ff8	Breadboard_developement.elf
-Finished building: default.size.stdout
- 
-Finished building: Breadboard_developement.list
- 
-22:49:38 **** Incremental Build of configuration Debug for project Breadboard_developement ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/adc.c" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G031xx -c -I../Core/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/adc.d" -MT"Core/Src/adc.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/adc.o"
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G031xx -c -I../Core/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "Breadboard_developement.elf" @"objects.list"   -mcpu=cortex-m0plus -T"D:\Sarbach_Product dev\Gassensor-garage\Gas-sens_Rs-485\Software_Breadboard\Breadboard_developement\STM32G031K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Breadboard_developement.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Breadboard_developement.elf
- 
-arm-none-eabi-size   Breadboard_developement.elf 
-arm-none-eabi-objdump -h -S  Breadboard_developement.elf  > "Breadboard_developement.list"
-   text	   data	    bss	    dec	    hex	filename
-  22152	     20	   2396	  24568	   5ff8	Breadboard_developement.elf
-Finished building: default.size.stdout
- 
-Finished building: Breadboard_developement.list
  
