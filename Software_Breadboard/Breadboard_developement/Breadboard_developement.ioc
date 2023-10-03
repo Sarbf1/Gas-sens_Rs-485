@@ -151,6 +151,7 @@ NVIC.NonMaskableInt_IRQn=true\:0\:0\:false\:false\:true\:false\:false\:false
 NVIC.PendSV_IRQn=true\:0\:0\:false\:false\:true\:false\:false\:false
 NVIC.SVC_IRQn=true\:0\:0\:false\:false\:true\:false\:false\:true
 NVIC.SysTick_IRQn=true\:0\:0\:false\:false\:true\:false\:true\:false
+NVIC.USART1_IRQn=true\:0\:0\:false\:false\:true\:true\:true\:true
 PA0.GPIOParameters=GPIO_Label
 PA0.GPIO_Label=ADC1_IN0_GAIN_CO
 PA0.Mode=IN0
