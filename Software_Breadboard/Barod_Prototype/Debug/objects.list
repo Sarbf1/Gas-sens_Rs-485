@@ -2,6 +2,8 @@
 "./Core/Src/dma.o"
 "./Core/Src/gpio.o"
 "./Core/Src/main.o"
+"./Core/Src/modbusSlave.o"
+"./Core/Src/modbus_crc.o"
 "./Core/Src/stm32g0xx_hal_msp.o"
 "./Core/Src/stm32g0xx_it.o"
 "./Core/Src/syscalls.o"

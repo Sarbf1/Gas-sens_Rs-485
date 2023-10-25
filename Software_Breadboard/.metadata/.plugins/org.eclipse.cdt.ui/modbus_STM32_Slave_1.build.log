@@ -1,0 +1,10 @@
+14:05:32 **** Build of configuration Debug for project modbus_STM32_Slave_1 ****
+make -j8 all 
+arm-none-eabi-size   modbus_STM32_Slave_1.elf 
+   text	   data	    bss	    dec	    hex	filename
+  15068	    148	   2148	  17364	   43d4	modbus_STM32_Slave_1.elf
+Finished building: default.size.stdout
+ 
+
+14:05:33 Build Finished. 0 errors, 0 warnings. (took 410ms)
+

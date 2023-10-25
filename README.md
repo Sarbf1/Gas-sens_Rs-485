@@ -33,7 +33,7 @@ Low pass filter for the PWM (from uC to OpAmp to voltag eand current output) has
 - [x] build and test prototype
 - [x] Prgram IC for analog measurment and analog output
 - [ ] Find better sensor supplier and include it on second version PCB
-- [ ] implement Modbus via RS-485
+- [x] implement Modbus via RS-485
 - [ ] create Bill of material
 - [ ] Make second physical prototype
 

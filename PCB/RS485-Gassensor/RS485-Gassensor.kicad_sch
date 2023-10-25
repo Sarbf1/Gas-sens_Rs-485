@@ -1798,7 +1798,7 @@
     (property "Reference" "C1" (at 105.41 48.26 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "CAP4.7nF" (at 105.41 50.8 0)
+    (property "Value" "CAP4.7uF" (at 105.41 50.8 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_1206_3216Metric" (at 104.14 44.45 0)
