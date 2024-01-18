@@ -1,9 +1,10 @@
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
-configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Breadboard_developement Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Barod_Prototype Debug
+configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Breadboard_developement Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:modbus_STM32_Slave_1 Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Board_Dev-layout Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Board_Dev-layout Debug (1),org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Barod_Prototype Debug
 eclipse.preferences.version=1
-org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Barod_Prototype\ Debug/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Barod_Prototype\ Debug/activeLaunchMode=debug
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Barod_Prototype\ Debug/activeLaunchTarget=null\:---
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Board_Dev-layout\ Debug\ (1)/activeLaunchMode=debug
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Breadboard_developement\ Debug/activeLaunchMode=run
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Breadboard_developement\ Debug/activeLaunchTarget=null\:---

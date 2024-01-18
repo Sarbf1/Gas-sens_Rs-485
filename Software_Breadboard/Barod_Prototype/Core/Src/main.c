@@ -28,6 +28,7 @@
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
 #include <stdbool.h>
+#include "modbusSlave.h"
 
 /* USER CODE END Includes */
 
@@ -39,12 +40,6 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 
-struct sensor {
-	uint32_t *input;
-	uint32_t *gain;
-	uint32_t *offset;
-	uint32_t output;
-};
 
 /* USER CODE END PD */
 
@@ -57,12 +52,16 @@ struct sensor {
 
 /* USER CODE BEGIN PV */
 
-uint32_t value_adc_DMA[7]={0,0,0,0,0,0,0};  // #TODO restructure as struct instrad array
-int32_t y = 0;
-int32_t a = 1;
-int32_t x = 1;
-int32_t b = 0;
+//UART_HandleTypeDef huart1;
 
+struct sensor {
+	uint32_t *input;
+	uint32_t *gain;
+	uint32_t *offset;
+	uint32_t output;
+};
+
+uint8_t SLAVEID = 0;
 
 /* USER CODE END PV */
 
@@ -70,10 +69,64 @@ int32_t b = 0;
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 
+//static void MX_GPIO_Init(void);
+//static void MX_USART1_UART_Init(void);
+
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+uint32_t value_adc_DMA[7]={0,0,0,0,0,0,0};  // #TODO restructure as struct instrad array
+int32_t y = 0;
+int32_t a = 1;
+int32_t x = 1;
+int32_t b = 0;
+
+uint8_t RxData[256];
+uint8_t TxData[256];
+
+
+void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
+{
+	if (RxData[0] == SLAVEID)
+	{
+		switch (RxData[1]){
+		case 0x03:
+			readHoldingRegs();
+			break;
+		case 0x04:
+			readInputRegs();
+			break;
+		case 0x01:
+			readCoils();
+			break;
+		case 0x02:
+			readInputs();
+			break;
+		case 0x06:
+			writeSingleReg();
+			break;
+		case 0x10:
+			writeHoldingRegs();
+			break;
+		case 0x05:
+			writeSingleCoil();
+			break;
+		case 0x0F:
+			writeMultiCoils();
+			break;
+		default:
+			modbusException(ILLEGAL_FUNCTION);
+			break;
+		}
+	}
+
+	HAL_UARTEx_ReceiveToIdle_IT(&huart1, RxData, 256);
+}
+
+
 
 /* USER CODE END 0 */
 
@@ -94,6 +147,7 @@ int main(void)
 
 	/* USER CODE BEGIN Init */
 
+
 	/* USER CODE END Init */
 
 	/* Configure the system clock */
@@ -106,12 +160,22 @@ int main(void)
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
 	MX_DMA_Init();
-	MX_USART2_UART_Init();
-	MX_ADC1_Init(); //IC hangs after this init step
+	MX_ADC1_Init();
 	MX_TIM1_Init();
 	MX_USART1_UART_Init();
 	MX_TIM2_Init();
 	/* USER CODE BEGIN 2 */
+
+	char port0 = HAL_GPIO_ReadPin(GPIO_IN_DIP0_GPIO_Port, GPIO_IN_DIP0_Pin);
+	char port1 = HAL_GPIO_ReadPin(GPIO_IN_DIP1_GPIO_Port, GPIO_IN_DIP1_Pin);
+	char port2 = HAL_GPIO_ReadPin(GPIO_IN_DIP2_GPIO_Port, GPIO_IN_DIP2_Pin);
+	char port3 = HAL_GPIO_ReadPin(GPIO_IN_DIP3_GPIO_Port, GPIO_IN_DIP3_Pin);
+	char port4 = HAL_GPIO_ReadPin(GPIO_IN_DIP4_GPIO_Port, GPIO_IN_DIP4_Pin);
+	char port5 = HAL_GPIO_ReadPin(GPIO_IN_DIP5_GPIO_Port, GPIO_IN_DIP5_Pin);
+
+	SLAVEID = (port0 << 5) | (port1 << 4) | (port2 << 3) | (port3 << 2) | (port4 << 1) |  port5 ;
+
+	HAL_UARTEx_ReceiveToIdle_IT(&huart1, RxData, 256);
 
 	struct sensor Co, No, Temp;
 
@@ -122,7 +186,7 @@ int main(void)
 	No.gain = &value_adc_DMA[4];
 	No.offset = &value_adc_DMA[5];
 	Temp.input = &value_adc_DMA[6];
-	Temp.gain = 0; //#TODO get this value from internal saved reference value
+	Temp.gain = 1; //#TODO get this value from internal saved reference value
 	Temp.offset = 0;
 
 
@@ -149,7 +213,7 @@ int main(void)
 		x= TIM1->ARR* *Co.input/4095;
 		a= (*Co.gain/2048)*20+80; // pitch between 80 and 120 [in percent]
 		b= *Co.offset*0.2-409; //results between -409 and +409
-		y=a*x*0.01+b;
+		y=a*0.01*x+b;
 		if (y<0) {y=0;}
 		if (y>TIM1->ARR) {y=TIM1->ARR;}
 
@@ -158,7 +222,7 @@ int main(void)
 		x= TIM2->ARR* *No.input/4095;
 		a= (*No.gain/2048)*20+80;
 		b= *No.offset*0.2-409;
-		y=a*x*0.01+b;
+		y=a*0.01*x+b;
 		if (y<0) {y=0;}
 		if (y>TIM2->ARR) {y=TIM2->ARR;}
 
@@ -210,6 +274,7 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
 
 /* USER CODE END 4 */
 

@@ -61,10 +61,6 @@ void Error_Handler(void);
 #define ADC1_IN0_GAIN_CO_GPIO_Port GPIOA
 #define ADC1_IN1_OFFSET_CO_Pin GPIO_PIN_1
 #define ADC1_IN1_OFFSET_CO_GPIO_Port GPIOA
-#define T_VCP_TX_Pin GPIO_PIN_2
-#define T_VCP_TX_GPIO_Port GPIOA
-#define T_VCP_RX_Pin GPIO_PIN_3
-#define T_VCP_RX_GPIO_Port GPIOA
 #define TIM2_CH1_PWM_NO_Pin GPIO_PIN_5
 #define TIM2_CH1_PWM_NO_GPIO_Port GPIOA
 #define ADC1_IN6_CO_Pin GPIO_PIN_6

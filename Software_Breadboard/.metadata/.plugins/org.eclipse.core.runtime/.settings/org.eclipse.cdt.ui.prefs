@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+org.eclipse.cdt.ui.outline.groupincludes=true
 spelling_locale_initialized=true
 useAnnotationsPrefPage=true
 useQuickDiffPrefPage=true
