@@ -12,6 +12,8 @@ extern uint8_t RxData[256];
 extern uint8_t TxData[256];
 extern UART_HandleTypeDef huart1;
 
+extern uint8_t SLAVEID;
+
 
 void sendData (uint8_t *data, int size)
 {
@@ -25,7 +27,7 @@ void sendData (uint8_t *data, int size)
 
 void modbusException (uint8_t exceptioncode)
 {
-	//| SLAVE_ID | FUNCTION_CODE | Exception code | CRC     |
+	//| SLAVEID | FUNCTION_CODE | Exception code | CRC     |
 	//| 1 BYTE   |  1 BYTE       |    1 BYTE      | 2 BYTES |
 
 	TxData[0] = RxData[0];       // slave ID
@@ -55,10 +57,10 @@ uint8_t readHoldingRegs (void)
 
 	// Prepare TxData buffer
 
-	//| SLAVE_ID | FUNCTION_CODE | BYTE COUNT | DATA      | CRC     |
+	//| SLAVEID | FUNCTION_CODE | BYTE COUNT | DATA      | CRC     |
 	//| 1 BYTE   |  1 BYTE       |  1 BYTE    | N*2 BYTES | 2 BYTES |
 
-	TxData[0] = SLAVE_ID;  // slave ID
+	TxData[0] = SLAVEID;  // slave ID
 	TxData[1] = RxData[1];  // function code
 	TxData[2] = numRegs*2;  // Byte count
 	int indx = 3;  // we need to keep track of how many bytes has been stored in TxData Buffer
@@ -94,10 +96,10 @@ uint8_t readInputRegs (void)
 
 	// Prepare TxData buffer
 
-	//| SLAVE_ID | FUNCTION_CODE | BYTE COUNT | DATA      | CRC     |
+	//| SLAVEID | FUNCTION_CODE | BYTE COUNT | DATA      | CRC     |
 	//| 1 BYTE   |  1 BYTE       |  1 BYTE    | N*2 BYTES | 2 BYTES |
 
-	TxData[0] = SLAVE_ID;  // slave ID
+	TxData[0] = SLAVEID;  // slave ID
 	TxData[1] = RxData[1];  // function code
 	TxData[2] = numRegs*2;  // Byte count
 	int indx = 3;  // we need to keep track of how many bytes has been stored in TxData Buffer
@@ -137,10 +139,10 @@ uint8_t readCoils (void)
 
 	// Prepare TxData buffer
 
-	//| SLAVE_ID | FUNCTION_CODE | BYTE COUNT | DATA      | CRC     |
+	//| SLAVEID | FUNCTION_CODE | BYTE COUNT | DATA      | CRC     |
 	//| 1 BYTE   |  1 BYTE       |  1 BYTE    | N*2 BYTES | 2 BYTES |
 
-	TxData[0] = SLAVE_ID;  // slave ID
+	TxData[0] = SLAVEID;  // slave ID
 	TxData[1] = RxData[1];  // function code
 	TxData[2] = (numCoils/8) + ((numCoils%8)>0 ? 1:0);  // Byte count
 	int indx = 3;  // we need to keep track of how many bytes has been stored in TxData Buffer
@@ -203,10 +205,10 @@ uint8_t readInputs (void)
 
 	// Prepare TxData buffer
 
-	//| SLAVE_ID | FUNCTION_CODE | BYTE COUNT | DATA      | CRC     |
+	//| SLAVEID | FUNCTION_CODE | BYTE COUNT | DATA      | CRC     |
 	//| 1 BYTE   |  1 BYTE       |  1 BYTE    | N*2 BYTES | 2 BYTES |
 
-	TxData[0] = SLAVE_ID;  // slave ID
+	TxData[0] = SLAVEID;  // slave ID
 	TxData[1] = RxData[1];  // function code
 	TxData[2] = (numCoils/8) + ((numCoils%8)>0 ? 1:0);  // Byte count
 	int indx = 3;  // we need to keep track of how many bytes has been stored in TxData Buffer
@@ -275,10 +277,10 @@ uint8_t writeHoldingRegs (void)
 
 	// Prepare Response
 
-	//| SLAVE_ID | FUNCTION_CODE | Start Addr | num of Regs    | CRC     |
+	//| SLAVEID | FUNCTION_CODE | Start Addr | num of Regs    | CRC     |
 	//| 1 BYTE   |  1 BYTE       |  2 BYTE    | 2 BYTES      | 2 BYTES |
 
-	TxData[0] = SLAVE_ID;    // slave ID
+	TxData[0] = SLAVEID;    // slave ID
 	TxData[1] = RxData[1];   // function code
 	TxData[2] = RxData[2];   // Start Addr HIGH Byte
 	TxData[3] = RxData[3];   // Start Addr LOW Byte
@@ -307,10 +309,10 @@ uint8_t writeSingleReg (void)
 
 	// Prepare Response
 
-	//| SLAVE_ID | FUNCTION_CODE | Start Addr | Data     | CRC     |
+	//| SLAVEID | FUNCTION_CODE | Start Addr | Data     | CRC     |
 	//| 1 BYTE   |  1 BYTE       |  2 BYTE    | 2 BYTES  | 2 BYTES |
 
-	TxData[0] = SLAVE_ID;    // slave ID
+	TxData[0] = SLAVEID;    // slave ID
 	TxData[1] = RxData[1];   // function code
 	TxData[2] = RxData[2];   // Start Addr HIGH Byte
 	TxData[3] = RxData[3];   // Start Addr LOW Byte
@@ -354,10 +356,10 @@ uint8_t writeSingleCoil (void)
 
 	// Prepare Response
 
-	//| SLAVE_ID | FUNCTION_CODE | Start Addr | Data     | CRC     |
+	//| SLAVEID | FUNCTION_CODE | Start Addr | Data     | CRC     |
 	//| 1 BYTE   |  1 BYTE       |  2 BYTE    | 2 BYTES  | 2 BYTES |
 
-	TxData[0] = SLAVE_ID;    // slave ID
+	TxData[0] = SLAVEID;    // slave ID
 	TxData[1] = RxData[1];   // function code
 	TxData[2] = RxData[2];   // Start Addr HIGH Byte
 	TxData[3] = RxData[3];   // Start Addr LOW Byte
@@ -431,10 +433,10 @@ uint8_t writeMultiCoils (void)
 
 	// Prepare Response
 
-	//| SLAVE_ID | FUNCTION_CODE | Start Addr | Data     | CRC     |
+	//| SLAVEID | FUNCTION_CODE | Start Addr | Data     | CRC     |
 	//| 1 BYTE   |  1 BYTE       |  2 BYTE    | 2 BYTES  | 2 BYTES |
 
-	TxData[0] = SLAVE_ID;    // slave ID
+	TxData[0] = SLAVEID;    // slave ID
 	TxData[1] = RxData[1];   // function code
 	TxData[2] = RxData[2];   // Start Addr HIGH Byte
 	TxData[3] = RxData[3];   // Start Addr LOW Byte

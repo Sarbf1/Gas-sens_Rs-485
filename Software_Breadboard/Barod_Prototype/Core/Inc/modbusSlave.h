@@ -11,7 +11,7 @@
 #include "modbus_crc.h"
 #include "stm32g0xx_hal.h"
 
-#define SLAVE_ID 7 //TODO import slve_ID from DIP-switch
+// #define SLAVEID 7 //TODO import slve_ID from DIP-switch
 
 #define ILLEGAL_FUNCTION       0x01
 #define ILLEGAL_DATA_ADDRESS   0x02

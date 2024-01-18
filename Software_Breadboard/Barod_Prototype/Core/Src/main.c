@@ -61,14 +61,12 @@ struct sensor {
 	uint32_t output;
 };
 
+uint8_t SLAVEID = 0;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-
-void MX_GPIO_Init(void);
-void MX_USART1_UART_Init(void);
-
 /* USER CODE BEGIN PFP */
 
 //static void MX_GPIO_Init(void);
@@ -92,7 +90,7 @@ uint8_t TxData[256];
 
 void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 {
-	if (RxData[0] == SLAVE_ID)
+	if (RxData[0] == SLAVEID)
 	{
 		switch (RxData[1]){
 		case 0x03:
@@ -133,41 +131,51 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 /* USER CODE END 0 */
 
 /**
-  * @brief  The application entry point.
-  * @retval int
-  */
+ * @brief  The application entry point.
+ * @retval int
+ */
 int main(void)
 {
-  /* USER CODE BEGIN 1 */
+	/* USER CODE BEGIN 1 */
 
-  /* USER CODE END 1 */
+	/* USER CODE END 1 */
 
-  /* MCU Configuration--------------------------------------------------------*/
+	/* MCU Configuration--------------------------------------------------------*/
 
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+	HAL_Init();
 
-  /* USER CODE BEGIN Init */
+	/* USER CODE BEGIN Init */
 
-  /* USER CODE END Init */
 
-  /* Configure the system clock */
-  SystemClock_Config();
+	/* USER CODE END Init */
 
-  /* USER CODE BEGIN SysInit */
+	/* Configure the system clock */
+	SystemClock_Config();
 
-  /* USER CODE END SysInit */
+	/* USER CODE BEGIN SysInit */
 
-  /* Initialize all configured peripherals */
-  MX_GPIO_Init();
-  MX_DMA_Init();
-  MX_ADC1_Init();
-  MX_TIM1_Init();
-  MX_USART1_UART_Init();
-  MX_TIM2_Init();
-  /* USER CODE BEGIN 2 */
+	/* USER CODE END SysInit */
 
-  HAL_UARTEx_ReceiveToIdle_IT(&huart1, RxData, 256);
+	/* Initialize all configured peripherals */
+	MX_GPIO_Init();
+	MX_DMA_Init();
+	MX_ADC1_Init();
+	MX_TIM1_Init();
+	MX_USART1_UART_Init();
+	MX_TIM2_Init();
+	/* USER CODE BEGIN 2 */
+
+	char port0 = HAL_GPIO_ReadPin(GPIO_IN_DIP0_GPIO_Port, GPIO_IN_DIP0_Pin);
+	char port1 = HAL_GPIO_ReadPin(GPIO_IN_DIP1_GPIO_Port, GPIO_IN_DIP1_Pin);
+	char port2 = HAL_GPIO_ReadPin(GPIO_IN_DIP2_GPIO_Port, GPIO_IN_DIP2_Pin);
+	char port3 = HAL_GPIO_ReadPin(GPIO_IN_DIP3_GPIO_Port, GPIO_IN_DIP3_Pin);
+	char port4 = HAL_GPIO_ReadPin(GPIO_IN_DIP4_GPIO_Port, GPIO_IN_DIP4_Pin);
+	char port5 = HAL_GPIO_ReadPin(GPIO_IN_DIP5_GPIO_Port, GPIO_IN_DIP5_Pin);
+
+	SLAVEID = (port0 << 5) | (port1 << 4) | (port2 << 3) | (port3 << 2) | (port4 << 1) |  port5 ;
+
+	HAL_UARTEx_ReceiveToIdle_IT(&huart1, RxData, 256);
 
 	struct sensor Co, No, Temp;
 
@@ -189,15 +197,15 @@ int main(void)
 	TIM1->CCR1 =0;
 	HAL_ADC_Start_DMA(&hadc1, value_adc_DMA, 7); //aquire date from all ADC
 
-  /* USER CODE END 2 */
+	/* USER CODE END 2 */
 
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
+	/* Infinite loop */
+	/* USER CODE BEGIN WHILE */
 	while (1)
 	{
-    /* USER CODE END WHILE */
+		/* USER CODE END WHILE */
 
-    /* USER CODE BEGIN 3 */
+		/* USER CODE BEGIN 3 */
 
 		HAL_ADC_Start_DMA(&hadc1, value_adc_DMA, 7); //this step takes ca 50uS #TODO perhaps export to internal timer callback (trigger)
 
@@ -205,7 +213,7 @@ int main(void)
 		x= TIM1->ARR* *Co.input/4095;
 		a= (*Co.gain/2048)*20+80; // pitch between 80 and 120 [in percent]
 		b= *Co.offset*0.2-409; //results between -409 and +409
-		y=a*x*0.01+b;
+		y=a*0.01*x+b;
 		if (y<0) {y=0;}
 		if (y>TIM1->ARR) {y=TIM1->ARR;}
 
@@ -214,7 +222,7 @@ int main(void)
 		x= TIM2->ARR* *No.input/4095;
 		a= (*No.gain/2048)*20+80;
 		b= *No.offset*0.2-409;
-		y=a*x*0.01+b;
+		y=a*0.01*x+b;
 		if (y<0) {y=0;}
 		if (y>TIM2->ARR) {y=TIM2->ARR;}
 
@@ -222,47 +230,47 @@ int main(void)
 
 		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_6); //toggle LED to measure cycle time
 	}
-  /* USER CODE END 3 */
+	/* USER CODE END 3 */
 }
 
 /**
-  * @brief System Clock Configuration
-  * @retval None
-  */
+ * @brief System Clock Configuration
+ * @retval None
+ */
 void SystemClock_Config(void)
 {
-  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+	RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+	RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
-  /** Configure the main internal regulator output voltage
-  */
-  HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1);
+	/** Configure the main internal regulator output voltage
+	 */
+	HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1);
 
-  /** Initializes the RCC Oscillators according to the specified parameters
-  * in the RCC_OscInitTypeDef structure.
-  */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
-  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  RCC_OscInitStruct.HSIDiv = RCC_HSI_DIV1;
-  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
-  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  {
-    Error_Handler();
-  }
+	/** Initializes the RCC Oscillators according to the specified parameters
+	 * in the RCC_OscInitTypeDef structure.
+	 */
+	RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+	RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+	RCC_OscInitStruct.HSIDiv = RCC_HSI_DIV1;
+	RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+	RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+	if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+	{
+		Error_Handler();
+	}
 
-  /** Initializes the CPU, AHB and APB buses clocks
-  */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+	/** Initializes the CPU, AHB and APB buses clocks
+	 */
+	RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+			|RCC_CLOCKTYPE_PCLK1;
+	RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
+	RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+	RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
-  {
-    Error_Handler();
-  }
+	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+	{
+		Error_Handler();
+	}
 }
 
 /* USER CODE BEGIN 4 */
@@ -271,33 +279,33 @@ void SystemClock_Config(void)
 /* USER CODE END 4 */
 
 /**
-  * @brief  This function is executed in case of error occurrence.
-  * @retval None
-  */
+ * @brief  This function is executed in case of error occurrence.
+ * @retval None
+ */
 void Error_Handler(void)
 {
-  /* USER CODE BEGIN Error_Handler_Debug */
+	/* USER CODE BEGIN Error_Handler_Debug */
 	/* User can add his own implementation to report the HAL error return state */
 	__disable_irq();
 	while (1)
 	{
 	}
-  /* USER CODE END Error_Handler_Debug */
+	/* USER CODE END Error_Handler_Debug */
 }
 
 #ifdef  USE_FULL_ASSERT
 /**
-  * @brief  Reports the name of the source file and the source line number
-  *         where the assert_param error has occurred.
-  * @param  file: pointer to the source file name
-  * @param  line: assert_param error line source number
-  * @retval None
-  */
+ * @brief  Reports the name of the source file and the source line number
+ *         where the assert_param error has occurred.
+ * @param  file: pointer to the source file name
+ * @param  line: assert_param error line source number
+ * @retval None
+ */
 void assert_failed(uint8_t *file, uint32_t line)
 {
-  /* USER CODE BEGIN 6 */
+	/* USER CODE BEGIN 6 */
 	/* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-  /* USER CODE END 6 */
+	/* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */

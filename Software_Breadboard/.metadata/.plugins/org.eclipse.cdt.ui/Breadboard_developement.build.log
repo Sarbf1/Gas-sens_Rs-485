@@ -1,4 +1,4 @@
-11:57:38 **** Incremental Build of configuration Debug for project Breadboard_developement ****
+23:50:37 **** Incremental Build of configuration Debug for project Breadboard_developement ****
 make -j8 all 
 arm-none-eabi-size   Breadboard_developement.elf 
    text	   data	    bss	    dec	    hex	filename
@@ -6,5 +6,5 @@ arm-none-eabi-size   Breadboard_developement.elf
 Finished building: default.size.stdout
  
 
-11:57:39 Build Finished. 0 errors, 0 warnings. (took 313ms)
+23:50:38 Build Finished. 0 errors, 0 warnings. (took 491ms)
 

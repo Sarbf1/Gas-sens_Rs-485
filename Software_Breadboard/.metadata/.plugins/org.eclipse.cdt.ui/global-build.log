@@ -1,12 +1,40 @@
-14:07:56 **** Incremental Build of configuration Debug for project Barod_Prototype ****
+23:50:03 **** Incremental Build of configuration Debug for project Barod_Prototype ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G031xx -c -I../Core/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_UARTEx_RxEventCallback':
+../Core/Src/main.c:93:26: error: 'SLAVEID' undeclared (first use in this function)
+   93 |         if (RxData[0] == SLAVEID)
+      |                          ^~~~~~~
+../Core/Src/main.c:93:26: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:190:19: warning: assignment to 'uint32_t *' {aka 'long unsigned int *'} from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  190 |         Temp.gain = 1; //#TODO get this value from internal saved reference value
+      |                   ^
+../Core/Src/main.c:181:31: warning: variable 'Temp' set but not used [-Wunused-but-set-variable]
+  181 |         struct sensor Co, No, Temp;
+      |                               ^~~~
+../Core/Src/main.c:158:17: warning: variable 'SLAVEID' set but not used [-Wunused-but-set-variable]
+  158 |         uint8_t SLAVEID = 0;
+      |                 ^~~~~~~
+In file included from ../Core/Src/main.c:31:
+At top level:
+../Core/Inc/modbusSlave.h:37:16: warning: 'Coils_Database' defined but not used [-Wunused-variable]
+   37 | static uint8_t Coils_Database[25]={
+      |                ^~~~~~~~~~~~~~
+../Core/Inc/modbusSlave.h:21:17: warning: 'Holding_Registers_Database' defined but not used [-Wunused-variable]
+   21 | static uint16_t Holding_Registers_Database[50]={
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:55: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+23:50:36 **** Incremental Build of configuration Debug for project Barod_Prototype ****
 make -j8 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G031xx -c -I../Core/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
 ../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:181:19: warning: assignment to 'uint32_t *' {aka 'long unsigned int *'} from 'int' makes pointer from integer without a cast [-Wint-conversion]
-  181 |         Temp.gain = 1; //#TODO get this value from internal saved reference value
+../Core/Src/main.c:188:19: warning: assignment to 'uint32_t *' {aka 'long unsigned int *'} from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  188 |         Temp.gain = 1; //#TODO get this value from internal saved reference value
       |                   ^
-../Core/Src/main.c:172:31: warning: variable 'Temp' set but not used [-Wunused-but-set-variable]
-  172 |         struct sensor Co, No, Temp;
+../Core/Src/main.c:179:31: warning: variable 'Temp' set but not used [-Wunused-but-set-variable]
+  179 |         struct sensor Co, No, Temp;
       |                               ^~~~
 In file included from ../Core/Src/main.c:31:
 At top level:
@@ -22,34 +50,62 @@ Finished building target: Barod_Prototype.elf
 arm-none-eabi-size   Barod_Prototype.elf 
 arm-none-eabi-objdump -h -S  Barod_Prototype.elf  > "Barod_Prototype.list"
    text	   data	    bss	    dec	    hex	filename
-  36924	    156	   2796	  39876	   9bc4	Barod_Prototype.elf
+  37288	    156	   2796	  40240	   9d30	Barod_Prototype.elf
 Finished building: default.size.stdout
  
 Finished building: Barod_Prototype.list
  
-14:10:08 **** Incremental Build of configuration Debug for project Barod_Prototype ****
+23:50:37 **** Incremental Build of configuration Debug for project Board_Dev-layout ****
+make -j8 all 
+arm-none-eabi-size   Board_Dev-layout.elf 
+   text	   data	    bss	    dec	    hex	filename
+  38024	    156	   2972	  41152	   a0c0	Board_Dev-layout.elf
+Finished building: default.size.stdout
+ 
+23:50:37 **** Incremental Build of configuration Debug for project Breadboard_developement ****
+make -j8 all 
+arm-none-eabi-size   Breadboard_developement.elf 
+   text	   data	    bss	    dec	    hex	filename
+  24548	     20	   2396	  26964	   6954	Breadboard_developement.elf
+Finished building: default.size.stdout
+ 
+23:50:38 **** Incremental Build of configuration Debug for project modbus_STM32_Slave_1 ****
+make -j8 all 
+arm-none-eabi-size   modbus_STM32_Slave_1.elf 
+   text	   data	    bss	    dec	    hex	filename
+  15068	    148	   2148	  17364	   43d4	modbus_STM32_Slave_1.elf
+Finished building: default.size.stdout
+ 
+23:51:11 **** Incremental Build of configuration Debug for project Barod_Prototype ****
 make -j8 all 
 arm-none-eabi-size   Barod_Prototype.elf 
    text	   data	    bss	    dec	    hex	filename
-  36924	    156	   2796	  39876	   9bc4	Barod_Prototype.elf
+  37288	    156	   2796	  40240	   9d30	Barod_Prototype.elf
 Finished building: default.size.stdout
  
-14:11:08 **** Incremental Build of configuration Debug for project Barod_Prototype ****
+23:53:40 **** Incremental Build of configuration Debug for project Barod_Prototype ****
 make -j8 all 
 arm-none-eabi-size   Barod_Prototype.elf 
    text	   data	    bss	    dec	    hex	filename
-  36924	    156	   2796	  39876	   9bc4	Barod_Prototype.elf
+  37288	    156	   2796	  40240	   9d30	Barod_Prototype.elf
 Finished building: default.size.stdout
  
-14:11:40 **** Incremental Build of configuration Debug for project Barod_Prototype ****
+23:55:34 **** Incremental Build of configuration Debug for project Barod_Prototype ****
+make -j8 all 
+arm-none-eabi-size   Barod_Prototype.elf 
+   text	   data	    bss	    dec	    hex	filename
+  37288	    156	   2796	  40240	   9d30	Barod_Prototype.elf
+Finished building: default.size.stdout
+ 
+00:01:58 **** Incremental Build of configuration Debug for project Barod_Prototype ****
 make -j8 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G031xx -c -I../Core/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
 ../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:181:19: warning: assignment to 'uint32_t *' {aka 'long unsigned int *'} from 'int' makes pointer from integer without a cast [-Wint-conversion]
-  181 |         Temp.gain = 1; //#TODO get this value from internal saved reference value
+../Core/Src/main.c:189:19: warning: assignment to 'uint32_t *' {aka 'long unsigned int *'} from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  189 |         Temp.gain = 1; //#TODO get this value from internal saved reference value
       |                   ^
-../Core/Src/main.c:172:31: warning: variable 'Temp' set but not used [-Wunused-but-set-variable]
-  172 |         struct sensor Co, No, Temp;
+../Core/Src/main.c:180:31: warning: variable 'Temp' set but not used [-Wunused-but-set-variable]
+  180 |         struct sensor Co, No, Temp;
       |                               ^~~~
 In file included from ../Core/Src/main.c:31:
 At top level:
@@ -65,7 +121,36 @@ Finished building target: Barod_Prototype.elf
 arm-none-eabi-size   Barod_Prototype.elf 
 arm-none-eabi-objdump -h -S  Barod_Prototype.elf  > "Barod_Prototype.list"
    text	   data	    bss	    dec	    hex	filename
-  36924	    156	   2796	  39876	   9bc4	Barod_Prototype.elf
+  37288	    156	   2796	  40240	   9d30	Barod_Prototype.elf
+Finished building: default.size.stdout
+ 
+Finished building: Barod_Prototype.list
+ 
+00:03:49 **** Incremental Build of configuration Debug for project Barod_Prototype ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G031xx -c -I../Core/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:189:19: warning: assignment to 'uint32_t *' {aka 'long unsigned int *'} from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  189 |         Temp.gain = 1; //#TODO get this value from internal saved reference value
+      |                   ^
+../Core/Src/main.c:180:31: warning: variable 'Temp' set but not used [-Wunused-but-set-variable]
+  180 |         struct sensor Co, No, Temp;
+      |                               ^~~~
+In file included from ../Core/Src/main.c:31:
+At top level:
+../Core/Inc/modbusSlave.h:37:16: warning: 'Coils_Database' defined but not used [-Wunused-variable]
+   37 | static uint8_t Coils_Database[25]={
+      |                ^~~~~~~~~~~~~~
+../Core/Inc/modbusSlave.h:21:17: warning: 'Holding_Registers_Database' defined but not used [-Wunused-variable]
+   21 | static uint16_t Holding_Registers_Database[50]={
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "Barod_Prototype.elf" @"objects.list"   -mcpu=cortex-m0plus -T"D:\Sarbach_Product dev\Gassensor-garage\Gas-sens_Rs-485\Software_Breadboard\Barod_Prototype\STM32G031K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Barod_Prototype.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Barod_Prototype.elf
+ 
+arm-none-eabi-size   Barod_Prototype.elf 
+arm-none-eabi-objdump -h -S  Barod_Prototype.elf  > "Barod_Prototype.list"
+   text	   data	    bss	    dec	    hex	filename
+  37288	    156	   2796	  40240	   9d30	Barod_Prototype.elf
 Finished building: default.size.stdout
  
 Finished building: Barod_Prototype.list
