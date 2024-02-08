@@ -16,13 +16,15 @@ A STM32G031K8 is the logical unit. Is is cheap and readily available.
 The very most components use standart fooprints. Thus, they are easily exchangeble in case of a shortage.
 All parts are SMD, except for the Sensors, DCDC converter and Connectors.
 All PCB components can be sourced by Mouser, except for the Gas Sensor.
-for developement purposes (TAG v0.1) a gas sensor type MQ-X were used (MQ-7 and MQ-135)
-i am currently looking into more professional solutions for the sensor.
+For developement purposes (TAG v0.1) a gas sensor type MQ-X were used (MQ-7 and MQ-135)
+TAG v0.2 makes use of the nemoto sensor, that uses low current and is more gas specific. 
+The I2C conection gives a possibility, to further extend with more sensors, such as the Sensirion SHT4X.
 
 ## Programming
 Hardware is developed in KiCad 7.0.
 
-everything is programmed on STM Cube IDE. The Sensor and trim potentiometers are read-in using DMA
+everything is programmed on STM Cube IDE. The Sensor and trim potentiometers are read-in using DMA.
+The max and minimum values of the potentiometers can be set by the Modbus. the specific address are found in the excel-table "Modbus-memorymap" in the software folder.
 
 ## Simulation
 Low pass filter for the PWM (from uC to OpAmp to voltag eand current output) has been simulated using LTSpice.
@@ -32,8 +34,8 @@ Low pass filter for the PWM (from uC to OpAmp to voltag eand current output) has
 - [X] PWM filter simulations
 - [x] build and test prototype
 - [x] Prgram IC for analog measurment and analog output
-- [ ] Find better sensor supplier and include it on second version PCB
+- [x] Find better sensor supplier and include it on second version PCB -> nemoto sensors
 - [x] implement Modbus via RS-485
 - [ ] create Bill of material
-- [ ] Make second physical prototype
+- [x] Make second physical prototype
 
