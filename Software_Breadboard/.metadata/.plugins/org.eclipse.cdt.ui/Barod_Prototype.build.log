@@ -1,4 +1,4 @@
-00:03:49 **** Incremental Build of configuration Debug for project Barod_Prototype ****
+00:20:00 **** Incremental Build of configuration Debug for project Barod_Prototype ****
 make -j8 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G031xx -c -I../Core/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
 ../Core/Src/main.c: In function 'main':
@@ -22,11 +22,11 @@ Finished building target: Barod_Prototype.elf
 arm-none-eabi-size   Barod_Prototype.elf 
 arm-none-eabi-objdump -h -S  Barod_Prototype.elf  > "Barod_Prototype.list"
    text	   data	    bss	    dec	    hex	filename
-  37288	    156	   2796	  40240	   9d30	Barod_Prototype.elf
+  37252	    156	   2796	  40204	   9d0c	Barod_Prototype.elf
 Finished building: default.size.stdout
  
 Finished building: Barod_Prototype.list
  
 
-00:03:50 Build Finished. 0 errors, 4 warnings. (took 1s.73ms)
+00:20:01 Build Finished. 0 errors, 4 warnings. (took 1s.22ms)
 

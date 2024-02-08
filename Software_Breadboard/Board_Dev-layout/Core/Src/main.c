@@ -62,6 +62,8 @@ struct sensor {
 	uint32_t output;
 };
 
+uint8_t SLAVEID = 0;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -89,7 +91,7 @@ uint8_t TxData[256];
 
 void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 {
-	if (RxData[0] == SLAVE_ID)
+	if (RxData[0] == SLAVEID)
 	{
 		switch (RxData[1]){
 		case 0x03:
@@ -165,6 +167,16 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
 
+
+	char port0 = HAL_GPIO_ReadPin(GPIO_IN_DIP0_GPIO_Port, GPIO_IN_DIP0_Pin);
+	char port1 = HAL_GPIO_ReadPin(GPIO_IN_DIP1_GPIO_Port, GPIO_IN_DIP1_Pin);
+	char port2 = HAL_GPIO_ReadPin(GPIO_IN_DIP2_GPIO_Port, GPIO_IN_DIP2_Pin);
+	char port3 = HAL_GPIO_ReadPin(GPIO_IN_DIP3_GPIO_Port, GPIO_IN_DIP3_Pin);
+	char port4 = HAL_GPIO_ReadPin(GPIO_IN_DIP4_GPIO_Port, GPIO_IN_DIP4_Pin);
+	char port5 = HAL_GPIO_ReadPin(GPIO_IN_DIP5_GPIO_Port, GPIO_IN_DIP5_Pin);
+
+	SLAVEID = (port0 << 5) | (port1 << 4) | (port2 << 3) | (port3 << 2) | (port4 << 1) |  port5 ;
+
   HAL_UARTEx_ReceiveToIdle_IT(&huart1, RxData, 256);
 
 	struct sensor Co, No, Temp;
@@ -183,8 +195,8 @@ int main(void)
 
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1); //start output PWM 1 CO
 	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1); //start output PWM 2 NO
-	TIM1->CCR1 =0;
-	TIM1->CCR1 =0;
+	TIM1->CCR1 =1;
+	TIM1->CCR2 =1;
 	HAL_ADC_Start_DMA(&hadc1, value_adc_DMA, 7); //aquire date from all ADC
 
   /* USER CODE END 2 */
@@ -201,22 +213,35 @@ int main(void)
 
 
 		x= TIM1->ARR* *Co.input/4095;
-		a= (*Co.gain/2048)*20+80; // pitch between 80 and 120 [in percent]
-		b= *Co.offset*0.2-409; //results between -409 and +409
-		y=a*x*0.01+b;
+		a= *Co.gain*(Input_Registers_Database[13]-Input_Registers_Database[11])/4095+Input_Registers_Database[11]; // initial pitch between 20 and 180 [in percent]
+		b= *Co.offset*(Input_Registers_Database[16]-Input_Registers_Database[14])/4095 + Input_Registers_Database[14]; //results between -409 and +409
+		y=a*x*0.01+b*0.1;
 		if (y<0) {y=0;}
 		if (y>TIM1->ARR) {y=TIM1->ARR;}
 
 		TIM1->CCR1 =y ;
 
-		x= TIM2->ARR* *No.input/4095;
-		a= (*No.gain/2048)*20+80;
-		b= *No.offset*0.2-409;
-		y=a*x*0.01+b;
+		x= (TIM2->ARR* *No.input)/4095;
+		a= *No.gain*(Input_Registers_Database[23]-Input_Registers_Database[21])/4095+Input_Registers_Database[21];
+		b= *No.offset*(Input_Registers_Database[26]-Input_Registers_Database[24])/4095 + Input_Registers_Database[24];
+		y=a*x*0.01+b*0.1;
 		if (y<0) {y=0;}
 		if (y>TIM2->ARR) {y=TIM2->ARR;}
 
 		TIM2->CCR1 = y;
+
+
+		Input_Registers_Database[10]=*Co.input;
+		Input_Registers_Database[12]=*Co.gain;
+		Input_Registers_Database[15]=*Co.offset;
+		Input_Registers_Database[17]=TIM1->CCR1;
+
+		Input_Registers_Database[20]=*Co.input;
+		Input_Registers_Database[22]=*Co.gain;
+		Input_Registers_Database[25]=*Co.offset;
+		Input_Registers_Database[27]=TIM2->CCR1;
+
+		//Input_Registers_Database[37]=Temp;
 
 		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_6); //toggle LED to measure cycle time
 	}

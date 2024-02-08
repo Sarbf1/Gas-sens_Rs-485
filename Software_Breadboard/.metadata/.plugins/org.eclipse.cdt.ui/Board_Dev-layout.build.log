@@ -1,10 +1,10 @@
-23:50:37 **** Incremental Build of configuration Debug for project Board_Dev-layout ****
+23:43:41 **** Incremental Build of configuration Debug for project Board_Dev-layout ****
 make -j8 all 
 arm-none-eabi-size   Board_Dev-layout.elf 
    text	   data	    bss	    dec	    hex	filename
-  38024	    156	   2972	  41152	   a0c0	Board_Dev-layout.elf
+  36524	    256	   2976	  39756	   9b4c	Board_Dev-layout.elf
 Finished building: default.size.stdout
  
 
-23:50:37 Build Finished. 0 errors, 0 warnings. (took 302ms)
+23:43:41 Build Finished. 0 errors, 0 warnings. (took 307ms)
 
